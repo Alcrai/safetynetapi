@@ -1,7 +1,7 @@
 package com.safetynetapi.model;
 
-import java.util.Date;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+
 
 public class Person {
     private String firstName;

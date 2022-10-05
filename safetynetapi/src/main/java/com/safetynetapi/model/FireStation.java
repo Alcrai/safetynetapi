@@ -1,8 +1,7 @@
 package com.safetynetapi.model;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import org.springframework.stereotype.Repository;
+
 
 public class FireStation {
     private String address;

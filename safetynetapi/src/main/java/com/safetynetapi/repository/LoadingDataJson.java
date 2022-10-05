@@ -1,5 +1,6 @@
 package com.safetynetapi.repository;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 import com.safetynetapi.model.FireStation;
@@ -14,12 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class LoadingDataJson implements LoadingData{
-    private static List<Person> persons ;
+public class LoadingDataJson implements ILoadingData {
+    private List<Person> persons ;
     private List<FireStation> fireStations;
     private List<MedicalRecord> medicalRecords;
 
     private String filePath = "safetynetapi/src/main/resources/data.json";
+
+    public LoadingDataJson(List<Person> persons, List<FireStation> fireStations, List<MedicalRecord> medicalRecords) {
+        this.persons = persons;
+        this.fireStations = fireStations;
+        this.medicalRecords = medicalRecords;
+    }
 
     @Override
     public List<Person> findAllPerson()  {
@@ -50,6 +57,8 @@ public class LoadingDataJson implements LoadingData{
 
         return persons;
     }
+
+
 
     @Override
     public List<FireStation> findAllFireStation() {
@@ -105,5 +114,7 @@ public class LoadingDataJson implements LoadingData{
     }
 
  }
+
+
 
 

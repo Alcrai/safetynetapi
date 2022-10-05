@@ -1,9 +1,10 @@
 package com.safetynetapi.model;
 
+import org.springframework.stereotype.Repository;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 public class MedicalRecord {
     private String firstName;
