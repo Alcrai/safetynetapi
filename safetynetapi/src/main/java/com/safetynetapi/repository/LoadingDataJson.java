@@ -22,6 +22,9 @@ public class LoadingDataJson implements ILoadingData {
 
     private String filePath = "safetynetapi/src/main/resources/data.json";
 
+    public LoadingDataJson() {
+    }
+
     public LoadingDataJson(List<Person> persons, List<FireStation> fireStations, List<MedicalRecord> medicalRecords) {
         this.persons = persons;
         this.fireStations = fireStations;
