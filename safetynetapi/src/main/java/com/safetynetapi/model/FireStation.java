@@ -1,15 +1,13 @@
 package com.safetynetapi.model;
 
-import org.springframework.stereotype.Repository;
-
 
 public class FireStation {
     private String address;
-    private  String stationNumber;
+    private  String station;
 
-    public FireStation(String address, String stationNumber) {
+    public FireStation(String address, String station) {
         this.address = address;
-        this.stationNumber = stationNumber;
+        this.station = station;
     }
 
     public String getAddress() {
@@ -20,19 +18,19 @@ public class FireStation {
         this.address = address;
     }
 
-    public String getStationNumber() {
-        return stationNumber;
+    public String getStation() {
+        return station;
     }
 
-    public void setStationNumber(String stationNumber) {
-        this.stationNumber = stationNumber;
+    public void setStation(String station) {
+        this.station = station;
     }
 
     @Override
     public String toString() {
         return "FireStation{" +
                 "address='" + address + '\'' +
-                ", stationNumber='" + stationNumber + '\'' +
+                ", station='" + station + '\'' +
                 '}';
     }
 }

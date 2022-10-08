@@ -4,17 +4,14 @@ import com.safetynetapi.dto.ChildAlertDto;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
-import com.safetynetapi.repository.ILoadingData;
+import com.safetynetapi.repository.ILoadData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class AlertServiceTest {
 
     @Mock
-    private ILoadingData iLoadingData;
+    private ILoadData loadData;
 
     private AlertService alertService;
 
@@ -35,7 +32,7 @@ public class AlertServiceTest {
 
     @BeforeEach
     public void initTest(){
-        alertService = new AlertService(iLoadingData);
+        alertService = new AlertService(loadData);
         persons=new ArrayList<>();
         fireStations=new ArrayList<>();
         medicalRecords=new ArrayList<>();
@@ -50,69 +47,69 @@ public class AlertServiceTest {
 
     @Test
     public void childAlertServiceReturnListOfChildAlertDto(){
-        when(iLoadingData.findAllPerson()).thenReturn(persons);
-        when(iLoadingData.findAllMedicalRecord()).thenReturn(medicalRecords);
+        when(loadData.findAllPerson()).thenReturn(persons);
+        when(loadData.findAllMedicalRecord()).thenReturn(medicalRecords);
         List<String> family = new ArrayList<>();
         family.add("firstName: Cat lastName: Blandio");
        List<ChildAlertDto> child =new ArrayList<>();
        child.add(new ChildAlertDto("Alex","Blandio",2,family));
 
        assertThat(alertService.childAlertService("1509 Culver St").size()).isEqualTo(child.size());
-       verify(iLoadingData).findAllPerson();
-       verify(iLoadingData).findAllMedicalRecord();
+       verify(loadData).findAllPerson();
+       verify(loadData).findAllMedicalRecord();
     }
 
     @Test
     public void phoneAlertServiceReturnNumber(){
-        when(iLoadingData.findAllPerson()).thenReturn(persons);
-        when(iLoadingData.findAllFireStation()).thenReturn(fireStations);
+        when(loadData.findAllPerson()).thenReturn(persons);
+        when(loadData.findAllFireStation()).thenReturn(fireStations);
         String stationNumber="1";
         assertThat(alertService.phoneAlertService(stationNumber)).first().isEqualTo("phone : 841-874-6512");
-        verify(iLoadingData).findAllPerson();
-        verify(iLoadingData).findAllFireStation();
+        verify(loadData).findAllPerson();
+        verify(loadData).findAllFireStation();
     }
 
     @Test
     public void fireServiceReturnTwoFireDto(){
-        when(iLoadingData.findAllPerson()).thenReturn(persons);
-        when(iLoadingData.findAllFireStation()).thenReturn(fireStations);
-        when(iLoadingData.findAllMedicalRecord()).thenReturn(medicalRecords);
+        when(loadData.findAllPerson()).thenReturn(persons);
+        when(loadData.findAllFireStation()).thenReturn(fireStations);
+        when(loadData.findAllMedicalRecord()).thenReturn(medicalRecords);
         String address = "1509 Culver St";
         assertThat(alertService.fireService(address)).size().isEqualTo(2);
-        verify(iLoadingData).findAllPerson();
-        verify(iLoadingData).findAllFireStation();
-        verify(iLoadingData).findAllMedicalRecord();
+        verify(loadData).findAllPerson();
+        verify(loadData).findAllFireStation();
+        verify(loadData).findAllMedicalRecord();
     }
 
     @Test
     public void personOfStationServiceReturn2FloodDto(){
-        when(iLoadingData.findAllPerson()).thenReturn(persons);
-        when(iLoadingData.findAllFireStation()).thenReturn(fireStations);
-        when(iLoadingData.findAllMedicalRecord()).thenReturn(medicalRecords);
+        when(loadData.findAllPerson()).thenReturn(persons);
+        when(loadData.findAllFireStation()).thenReturn(fireStations);
+        when(loadData.findAllMedicalRecord()).thenReturn(medicalRecords);
         String stations = "1";
         assertThat(alertService.personOfStationService(stations)).size().isEqualTo(2);
-        verify(iLoadingData).findAllPerson();
-        verify(iLoadingData).findAllFireStation();
-        verify(iLoadingData).findAllMedicalRecord();
+        verify(loadData).findAllPerson();
+        verify(loadData).findAllFireStation();
+        verify(loadData).findAllMedicalRecord();
     }
 
     @Test
     public void personWithMedicalRecordServiceReturnOnePersonInfoDto(){
-        when(iLoadingData.findAllPerson()).thenReturn(persons);
-        when(iLoadingData.findAllMedicalRecord()).thenReturn(medicalRecords);
+        when(loadData.findAllPerson()).thenReturn(persons);
+        when(loadData.findAllMedicalRecord()).thenReturn(medicalRecords);
         String firstName = "Alex";
         String lastName = "Blandio";
         assertThat(alertService.personWithMedicalRecordService(firstName,lastName)).size().isEqualTo(1);
-        verify(iLoadingData).findAllPerson();
-        verify(iLoadingData).findAllMedicalRecord();
+        verify(loadData).findAllPerson();
+        verify(loadData).findAllMedicalRecord();
     }
 
     @Test
     public void EmailPerCityServiceReturnTwoMail(){
-        when(iLoadingData.findAllPerson()).thenReturn(persons);
+        when(loadData.findAllPerson()).thenReturn(persons);
         String city = "Culver";
         assertThat(alertService.EmailPerCityService(city)).size().isEqualTo(2);
-        verify(iLoadingData).findAllPerson();
+        verify(loadData).findAllPerson();
     }
 
 

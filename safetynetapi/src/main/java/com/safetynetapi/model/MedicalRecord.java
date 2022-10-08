@@ -23,6 +23,9 @@ public class MedicalRecord {
         this.age=calculAge();
     }
 
+    public MedicalRecord() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

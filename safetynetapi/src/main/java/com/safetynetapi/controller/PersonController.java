@@ -4,39 +4,69 @@ package com.safetynetapi.controller;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
+import com.safetynetapi.repository.ILoadData;
 import com.safetynetapi.repository.ILoadingData;
-import com.safetynetapi.repository.UpdateDataJson;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.safetynetapi.service.IPersonService;
+import com.safetynetapi.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 public class PersonController {
-
-    private final ILoadingData ILoadingData;
-
-
-    public PersonController(ILoadingData ILoadingData) {
-
-        this.ILoadingData = ILoadingData;
+   private IPersonService personService;
+    @Autowired
+    public PersonController(IPersonService personService) {
+        this.personService = personService;
     }
 
     @GetMapping("/person")
     public List<Person> ListPersons() {
-        List<Person> persons = ILoadingData.findAllPerson();
-        List<FireStation> fireStations = ILoadingData.findAllFireStation();
-        List<MedicalRecord> medicalRecords = ILoadingData.findAllMedicalRecord();
-        UpdateDataJson updateDataJson = new UpdateDataJson(persons,fireStations,medicalRecords);
-        updateDataJson.writeFileJson(persons,fireStations,medicalRecords);
-        return ILoadingData.findAllPerson() ;
+        return personService.findAllPerson() ;
     }
 
-   /* @PostMapping("/person")
-    public void savePerson(@RequestBody Person person){
-        loadingData.findAllPerson();
-        loadingData.save(person);
+    @PostMapping("/person")
+    public ResponseEntity<Person> newPerson(@RequestBody Person person){
+        Person personAdded = personService.save(person);
+        if(Objects.isNull(personAdded)){
+            return ResponseEntity.noContent().build();
+        }
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(personAdded)
+                .toUri();
+        return ResponseEntity.created(location).build();
 
-    }*/
+    }
+
+    @PutMapping("/person")
+    public ResponseEntity<Person> updatePerson(@RequestParam("firstName")String firstName,@RequestParam("lastName") String lastName,@RequestBody Person person){
+        Person personAdded = personService.updatePerson(firstName,lastName,person);
+        if(Objects.isNull(personAdded)){
+            return ResponseEntity.noContent().build();
+        }
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(personAdded)
+                .toUri();
+        return ResponseEntity.created(location).build();
+
+    }
+
+    @DeleteMapping("/person")
+    public Map<String,Boolean> deletePerson(@RequestParam("firstName") String firstName,@RequestParam("lastName")String lastName){
+        Person personDelete = personService.deletePerson(firstName,lastName);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
+
 
 }

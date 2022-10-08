@@ -7,11 +7,11 @@ import com.safetynetapi.model.Person;
 import java.util.List;
 
 public interface ILoadingData {
-    List<Person> findAllPerson();
+    List<Person> getPersons();
 
-    List<FireStation> findAllFireStation();
+    List<FireStation> getFireStations();
 
-    List<MedicalRecord> findAllMedicalRecord();
+    List<MedicalRecord> getMedicalRecords();
 
 
 

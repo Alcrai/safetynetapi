@@ -109,6 +109,13 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+						<configuration>
+							<excludes>
+								<exclude>com/safetynetapi/dto/*</exclude>
+								<exclude>com/safetynetapi/model/*</exclude>
+								<exclude>com/safetynetapi/safetynetapi/*</exclude>
+							</excludes>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

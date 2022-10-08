@@ -1,12 +1,10 @@
 package com.safetynetapi.repository;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.any.Any;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
-import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +12,6 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class LoadingDataJson implements ILoadingData {
     private List<Person> persons ;
     private List<FireStation> fireStations;
@@ -23,15 +20,11 @@ public class LoadingDataJson implements ILoadingData {
     private String filePath = "safetynetapi/src/main/resources/data.json";
 
     public LoadingDataJson() {
+        this.persons = this.findAllPerson();
+        this.fireStations = this.findAllFireStation();
+        this.medicalRecords = this.findAllMedicalRecord();
     }
 
-    public LoadingDataJson(List<Person> persons, List<FireStation> fireStations, List<MedicalRecord> medicalRecords) {
-        this.persons = persons;
-        this.fireStations = fireStations;
-        this.medicalRecords = medicalRecords;
-    }
-
-    @Override
     public List<Person> findAllPerson()  {
 
         byte[] bytesFile = new byte[0];
@@ -61,9 +54,6 @@ public class LoadingDataJson implements ILoadingData {
         return persons;
     }
 
-
-
-    @Override
     public List<FireStation> findAllFireStation() {
         byte[] bytesFile = new byte[0];
         try {
@@ -87,7 +77,6 @@ public class LoadingDataJson implements ILoadingData {
         return fireStations;
     }
 
-    @Override
     public List<MedicalRecord> findAllMedicalRecord() {
         byte[] bytesFile = new byte[0];
         try {
@@ -113,10 +102,24 @@ public class LoadingDataJson implements ILoadingData {
                         m.get("medications").toString(),
                         m.get("allergies").toString())));
 
-               return medicalRecords;
+        return medicalRecords;
     }
 
- }
+    @Override
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    @Override
+    public List<FireStation> getFireStations() {
+        return fireStations;
+    }
+
+    @Override
+    public List<MedicalRecord> getMedicalRecords() {
+        return medicalRecords;
+    }
+}
 
 
 

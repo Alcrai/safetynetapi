@@ -1,25 +1,63 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.repository.ILoadingData;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.safetynetapi.model.MedicalRecord;
+import com.safetynetapi.model.Person;
+import com.safetynetapi.repository.ILoadData;
+import com.safetynetapi.service.IMedicalRecordService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URI;
+import java.util.*;
 
 @RestController
 public class MedicalRecordController {
 
-    private ILoadingData ILoadingData;
+    private IMedicalRecordService medicalRecordService;
 
-    public MedicalRecordController(ILoadingData ILoadingData) {
-        this.ILoadingData = ILoadingData;
+    public MedicalRecordController(IMedicalRecordService medicalRecordService) {
+        this.medicalRecordService = medicalRecordService;
     }
 
-    @GetMapping("medicalRecord")
-    public List<String> listMedicalRecord(){
-        List<String> listemedical= new ArrayList<>();
-        ILoadingData.findAllMedicalRecord().forEach(md ->listemedical.add(md.toString()));
-        return listemedical;
+    @GetMapping("/medicalRecord")
+    public List<MedicalRecord> listMedicalRecord(){
+        return medicalRecordService.findAllMedicalRecord();
+    }
+
+    @PostMapping("/medicalRecord")
+    public ResponseEntity<MedicalRecord> newMedicalRecord(@RequestBody MedicalRecord medicalRecord){
+        MedicalRecord medicalRecordAdded = medicalRecordService.saveMedicalRecord(medicalRecord);
+        if(Objects.isNull(medicalRecordAdded)){
+            return ResponseEntity.noContent().build();
+        }
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(medicalRecordAdded)
+                .toUri();
+        return ResponseEntity.created(location).build();
+
+    }
+
+    @PutMapping("/medicalRecord")
+    public ResponseEntity<MedicalRecord> updateMedicalRecord(@RequestParam("firstName")String firstName,@RequestParam("lastName") String lastName,@RequestBody MedicalRecord medicalRecord){
+        MedicalRecord medicalRecordAdded = medicalRecordService.updateMedicalRecord(firstName,lastName,medicalRecord);
+        if(Objects.isNull(medicalRecordAdded)){
+            return ResponseEntity.noContent().build();
+        }
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(medicalRecordAdded)
+                .toUri();
+        return ResponseEntity.created(location).build();
+
+    }
+
+    @DeleteMapping("/medicalRecord")
+    public Map<String,Boolean> deletePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName")String lastName){
+        MedicalRecord medicalRecordDelete = medicalRecordService.deleteMedicalRecord(firstName,lastName);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }
