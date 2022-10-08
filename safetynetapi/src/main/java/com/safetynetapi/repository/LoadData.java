@@ -14,11 +14,13 @@ public class LoadData implements ILoadData{
     public List<Person> persons;
     public List<FireStation> fireStations;
     public List<MedicalRecord> medicalRecords;
+    private ILoadingData loadingData;
 
-    public LoadData(List<Person> persons, List<FireStation> fireStations, List<MedicalRecord> medicalRecords) {
-        this.persons = persons;
-        this.fireStations = fireStations;
-        this.medicalRecords = medicalRecords;
+    public LoadData() {
+        loadingData = new LoadingDataJson();
+        this.persons = loadingData.getPersons();
+        this.fireStations = loadingData.getFireStations();
+        this.medicalRecords = loadingData.getMedicalRecords();
     }
 
     public List<Person> getPersons() {
@@ -61,7 +63,7 @@ public class LoadData implements ILoadData{
     }
 
     @Override
-    public FireStation save(FireStation fireStation){
+    public FireStation saveFireStation(FireStation fireStation){
         fireStations.add(fireStation);
         return fireStation;
     }

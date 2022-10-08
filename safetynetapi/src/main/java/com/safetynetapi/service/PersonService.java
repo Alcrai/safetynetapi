@@ -5,17 +5,15 @@ import com.safetynetapi.repository.ILoadData;
 import com.safetynetapi.repository.ILoadingData;
 import com.safetynetapi.repository.LoadData;
 import com.safetynetapi.repository.LoadingDataJson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class PersonService implements IPersonService{
-    private ILoadingData loadingData;
-    private ILoadData loadData;
-
+   private ILoadData loadData;
+    @Autowired
     public PersonService(ILoadData loadData) {
-        loadingData = new LoadingDataJson();
-        loadData = new LoadData(loadingData.getPersons(),loadingData.getFireStations(),loadingData.getMedicalRecords());
         this.loadData = loadData;
     }
     @Override

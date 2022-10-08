@@ -13,14 +13,11 @@ import java.util.List;
 
 @Service
 public class MedicalRecordService implements IMedicalRecordService{
-    private ILoadingData loadingData;
-    private ILoadData loadData;
+   private ILoadData loadData;
 
     @Autowired
     public MedicalRecordService(ILoadData loadData) {
-        loadingData = new LoadingDataJson();
-        loadData = new LoadData(loadingData.getPersons(),loadingData.getFireStations(),loadingData.getMedicalRecords());
-        this.loadData = loadData;
+       this.loadData = loadData;
     }
 
     @Override

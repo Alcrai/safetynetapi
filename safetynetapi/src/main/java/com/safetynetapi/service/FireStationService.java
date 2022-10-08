@@ -16,14 +16,11 @@ import java.util.List;
 
 @Service
 public class FireStationService implements IFireStationService{
-    private ILoadingData loadingData;
     private ILoadData loadData;
 
     @Autowired
     public FireStationService(ILoadData loadData) {
-        loadingData = new LoadingDataJson();
-        loadData = new LoadData(loadingData.getPersons(),loadingData.getFireStations(),loadingData.getMedicalRecords());
-        this.loadData = loadData;
+       this.loadData = loadData;
     }
 
     @Override
@@ -59,7 +56,7 @@ public class FireStationService implements IFireStationService{
 
     @Override
     public FireStation save(FireStation fireStation) {
-        loadData.save(fireStation);
+        loadData.saveFireStation(fireStation);
         return fireStation;
     }
 

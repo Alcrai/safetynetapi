@@ -22,13 +22,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class AlertService implements IAlertService{
-    private ILoadingData loadingData;
-    private ILoadData loadData;
+    public ILoadData loadData;
     @Autowired
     public AlertService(ILoadData loadData) {
-        loadingData = new LoadingDataJson();
-        loadData = new LoadData(loadingData.getPersons(),loadingData.getFireStations(),loadingData.getMedicalRecords());
-        this.loadData = loadData;
+        this.loadData =loadData;
     }
     @Override
     public List<ChildAlertDto> childAlertService(String address) {

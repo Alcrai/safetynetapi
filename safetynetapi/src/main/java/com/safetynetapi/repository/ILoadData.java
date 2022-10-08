@@ -10,7 +10,7 @@ public interface ILoadData {
     List<Person> findAllPerson();
 
     List<FireStation> findAllFireStation();
-    FireStation save(FireStation fireStation);
+    FireStation saveFireStation(FireStation fireStation);
 
     List<MedicalRecord> findAllMedicalRecord();
 
