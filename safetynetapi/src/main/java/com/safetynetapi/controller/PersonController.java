@@ -1,13 +1,8 @@
 package com.safetynetapi.controller;
 
 
-import com.safetynetapi.model.FireStation;
-import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
-import com.safetynetapi.repository.ILoadData;
-import com.safetynetapi.repository.ILoadingData;
 import com.safetynetapi.service.IPersonService;
-import com.safetynetapi.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +16,7 @@ import java.util.Objects;
 
 @RestController
 public class PersonController {
-   private IPersonService personService;
+    private IPersonService personService;
     @Autowired
     public PersonController(IPersonService personService) {
         this.personService = personService;
@@ -67,6 +62,7 @@ public class PersonController {
         response.put("deleted", Boolean.TRUE);
         return response;
     }
+
 
 
 }

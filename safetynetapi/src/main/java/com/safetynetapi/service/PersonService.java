@@ -2,9 +2,6 @@ package com.safetynetapi.service;
 
 import com.safetynetapi.model.Person;
 import com.safetynetapi.repository.ILoadData;
-import com.safetynetapi.repository.ILoadingData;
-import com.safetynetapi.repository.LoadData;
-import com.safetynetapi.repository.LoadingDataJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

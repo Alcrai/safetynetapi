@@ -28,7 +28,7 @@ public class AlertController {
     }
 
     @GetMapping("/phoneAlert")
-    public Set<String> ListPhoneAlert(@RequestParam("firestation") String fireStationNumber){
+    public Set<String> listPhoneAlert(@RequestParam("firestation") String fireStationNumber){
         return alertService.phoneAlertService(fireStationNumber);
     }
 
@@ -48,7 +48,7 @@ public class AlertController {
     }
 
     @GetMapping("/communityEmail")
-    public Set<String> ListEmailPerCity(@RequestParam("city") String city){
+    public Set<String> listEmailPerCity(@RequestParam("city") String city){
         return alertService.EmailPerCityService(city);
     }
 }

@@ -2,7 +2,6 @@ package com.safetynetapi.controller;
 
 import com.safetynetapi.dto.FireStationDto;
 import com.safetynetapi.model.FireStation;
-import com.safetynetapi.repository.ILoadingData;
 import com.safetynetapi.service.IFireStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +17,10 @@ import java.util.Objects;
 @RestController
 public class FireStationController {
 
-      private IFireStationService fireStationService;
+    private IFireStationService fireStationService;
     @Autowired
     public FireStationController(IFireStationService fireStationService) {
-         this.fireStationService = fireStationService;
+        this.fireStationService = fireStationService;
     }
 
     @GetMapping("/firestation")
@@ -30,7 +29,7 @@ public class FireStationController {
     }
 
     @GetMapping("/firestationList")
-    public List<FireStation> ListStation(){
+    public List<FireStation> listStation(){
         return fireStationService.fireStationList();
     }
 
