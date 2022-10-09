@@ -14,16 +14,8 @@ public class FireStation {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getStation() {
         return station;
-    }
-
-    public void setStation(String station) {
-        this.station = station;
     }
 
     @Override

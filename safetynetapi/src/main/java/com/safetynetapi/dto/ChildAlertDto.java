@@ -1,8 +1,8 @@
 package com.safetynetapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import org.springframework.boot.SpringApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
@@ -16,6 +16,6 @@ public class ChildAlertDto {
         this.firstName = firstName;
         this.lastname = lastname;
         this.age = age;
-        this.family = family;
+        this.family = new ArrayList<String>(family);
     }
 }
