@@ -52,7 +52,7 @@ public class MedicalRecordController {
     }
 
     @DeleteMapping("/medicalRecord")
-    public Map<String,Boolean> deletePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName")String lastName){
+    public Map<String,Boolean> deleteMedicalRecord(@RequestParam("firstName") String firstName, @RequestParam("lastName")String lastName){
         MedicalRecord medicalRecordDelete = medicalRecordService.deleteMedicalRecord(firstName,lastName);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
