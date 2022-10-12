@@ -6,45 +6,20 @@ import com.safetynetapi.model.Person;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Repository
-public class LoadData implements ILoadData{
-    public List<Person> persons;
-    public List<FireStation> fireStations;
-    public List<MedicalRecord> medicalRecords;
+public class LoadDAO implements ILoadDAO {
+    private List<Person> persons;
+    private List<FireStation> fireStations;
+    private List<MedicalRecord> medicalRecords;
     private ILoadingData loadingData;
 
-    public LoadData() {
+    public LoadDAO() {
         loadingData = new LoadingDataJson();
         this.persons = loadingData.getPersons();
         this.fireStations = loadingData.getFireStations();
         this.medicalRecords = loadingData.getMedicalRecords();
-    }
-
-    public List<Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
-    public List<FireStation> getFireStations() {
-        return fireStations;
-    }
-
-    public void setFireStations(List<FireStation> fireStations) {
-        this.fireStations = fireStations;
-    }
-
-    public List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
-    }
-
-    public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
-        this.medicalRecords = medicalRecords;
     }
 
     @Override

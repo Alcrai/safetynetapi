@@ -18,6 +18,14 @@ public class FireStation {
         return station;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setStation(String station) {
+        this.station = station;
+    }
+
     @Override
     public String toString() {
         return "FireStation{" +

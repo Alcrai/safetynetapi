@@ -48,6 +48,22 @@ public class MedicalRecord {
         return age;
     }
 
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setMedications(String medications) {
+        this.medications = medications;
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     private int calculAge(){
         String birthday = this.birthdate;
         String[] arrBirthday = birthday.split("/");

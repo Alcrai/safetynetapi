@@ -1,8 +1,7 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.dto.FireStationDto;
+import com.safetynetapi.dto.FireStationDTO;
 import com.safetynetapi.model.FireStation;
-import com.safetynetapi.repository.ILoadingData;
 import com.safetynetapi.service.IFireStationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class FireStationController {
     }
 
     @GetMapping("/firestation")
-    public List<FireStationDto> listOfPersonOfStation(@RequestParam("stationNumber") String station_number){
+    public List<FireStationDTO> listOfPersonOfStation(@RequestParam("stationNumber") String station_number){
         return fireStationService.personOfStationService(station_number);
     }
 

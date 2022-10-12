@@ -1,19 +1,16 @@
 package com.safetynetapi.service;
 
 import com.safetynetapi.model.Person;
-import com.safetynetapi.repository.ILoadData;
-import com.safetynetapi.repository.ILoadingData;
-import com.safetynetapi.repository.LoadData;
-import com.safetynetapi.repository.LoadingDataJson;
+import com.safetynetapi.repository.ILoadDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class PersonService implements IPersonService{
-   private ILoadData loadData;
+   private ILoadDAO loadData;
     @Autowired
-    public PersonService(ILoadData loadData) {
+    public PersonService(ILoadDAO loadData) {
         this.loadData = loadData;
     }
     @Override

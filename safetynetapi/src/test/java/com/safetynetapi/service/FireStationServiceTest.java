@@ -3,7 +3,7 @@ package com.safetynetapi.service;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
-import com.safetynetapi.repository.ILoadData;
+import com.safetynetapi.repository.ILoadDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class FireStationServiceTest {
     @Mock
-    private ILoadData loadData;
+    private ILoadDAO loadData;
 
     private FireStationService fireStationService;
 

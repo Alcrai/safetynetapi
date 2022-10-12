@@ -3,7 +3,7 @@ package com.safetynetapi.dto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class FloodDto {
+public class FloodDTO {
     String address;
     String station;
     String firstName;
@@ -13,7 +13,7 @@ public class FloodDto {
     String medications;
     String allergies;
 
-    public FloodDto(String address, String station, String firstName, String lastName, String phone, int age, String medications, String allergies) {
+    public FloodDTO(String address, String station, String firstName, String lastName, String phone, int age, String medications, String allergies) {
         this.address = address;
         this.station = station;
         this.firstName = firstName;

@@ -1,8 +1,6 @@
 package com.safetynetapi.controller;
 
 import com.safetynetapi.model.MedicalRecord;
-import com.safetynetapi.model.Person;
-import com.safetynetapi.repository.ILoadData;
 import com.safetynetapi.service.IMedicalRecordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

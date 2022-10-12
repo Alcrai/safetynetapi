@@ -1,7 +1,7 @@
 package com.safetynetapi.service;
 
 import com.safetynetapi.model.MedicalRecord;
-import com.safetynetapi.repository.ILoadData;
+import com.safetynetapi.repository.ILoadDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class MedicalRecordServiceTest {
     @Mock
-    private ILoadData loadData;
+    private ILoadDAO loadData;
     private MedicalRecordService medicalRecordService;
     public List<MedicalRecord> medicalRecords;
 
