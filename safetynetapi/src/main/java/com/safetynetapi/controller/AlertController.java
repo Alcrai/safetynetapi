@@ -23,32 +23,32 @@ public class AlertController {
     }
 
     @GetMapping("/childAlert")
-    public List<ChildAlertDTO> listChildAlert(@RequestParam("address") String address){
+    public List<ChildAlertDTO> getChildAlert(@RequestParam("address") String address){
         return alertService.childAlertService(address);
     }
 
     @GetMapping("/phoneAlert")
-    public Set<String> listPhoneAlert(@RequestParam("firestation") String fireStationNumber){
+    public Set<String> getPhoneAlert(@RequestParam("firestation") String fireStationNumber){
         return alertService.phoneAlertService(fireStationNumber);
     }
 
     @GetMapping("/fire")
-    public List<FireDTO> listFire(@RequestParam("address") String address){
+    public List<FireDTO> getFire(@RequestParam("address") String address){
         return alertService.fireService(address);
     }
 
     @GetMapping("/flood/stations")
-    public List<FloodDTO> listPersonOfStation(@RequestParam("stations") String stations){
+    public List<FloodDTO> getFloodStation(@RequestParam("stations") String stations){
         return alertService.personOfStationService(stations);
     }
 
     @GetMapping("/personInfo")
-    public List<PersonInfoDTO> listPersonWithMedicalRecord(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
+    public List<PersonInfoDTO> getPersoninfo(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
         return alertService.personWithMedicalRecordService(firstName,lastName);
     }
 
     @GetMapping("/communityEmail")
-    public Set<String> listEmailPerCity(@RequestParam("city") String city){
+    public Set<String> getCommunityEmail(@RequestParam("city") String city){
         return alertService.emailPerCityService(city);
     }
 }

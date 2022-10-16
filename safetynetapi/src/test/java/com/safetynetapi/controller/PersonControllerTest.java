@@ -1,57 +1,60 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.dto.FireDTO;
-import com.safetynetapi.model.Person;
-import com.safetynetapi.service.IAlertService;
-import com.safetynetapi.service.IPersonService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class PersonControllerTest {
 
-    @Mock
-    private IPersonService personService;
+    @Autowired
+    private MockMvc mockMvc;
 
-    private PersonController personController;
-
-    private List<Person> persons;
-    private Person person;
-
-    @BeforeEach
-    public void init(){
-        personController = new PersonController(personService);
-        persons = new ArrayList<>();
-        person = new Person("Alex","Blandio","1 Culver St","Culver","12563","123-123-123","alex@mail.com");
-        persons.add(person);
+    @Test
+    public void getPerson_success() throws Exception {
+        mockMvc.perform(get("/person"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].firstName", is("John")))
+                .andExpect(jsonPath("$[0].lastName", is("Boyd")))
+                .andExpect(jsonPath("$[0].address", is("1509 Culver St")))
+                .andExpect(jsonPath("$[0].city", is("Culver")))
+                .andExpect(jsonPath("$[0].zip", is("97451")))
+                .andExpect(jsonPath("$[0].phone", is("841-874-6512")))
+                .andExpect(jsonPath("$[0].email", is("jaboyd@email.com")));
     }
 
     @Test
-    public void ListPersonsReturnAList(){
-       when(personService.findAllPerson()).thenReturn(persons);
-       assertThat(personController.listPersons()).size().isEqualTo(1);
-       verify(personService).findAllPerson();
+    public void postPerson_success() throws Exception {
+        mockMvc.perform(post("/person")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"firstName\":\"Alex\", \"lastName\":\"Bland\", \"address\":\"1509 Culver St\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"alexbland@email.com\" }"))
+                .andExpect(status().isCreated());
     }
+
     @Test
-    public void deletePersonTestReturnMap(){
-        when(personService.deletePerson("Alex","Blandio")).thenReturn(person);
-        assertThat(personController.deletePerson("Alex","Blandio")).hasSize(1);
-        verify(personService).deletePerson("Alex","Blandio");
+    public void putPerson_success() throws Exception {
+        mockMvc.perform(put("/person")
+                        .param("firstName","Alex")
+                        .param("lastName","Bland")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"firstName\":\"Alex\", \"lastName\":\"Bland\", \"address\":\"1 Culver St\", \"city\":\"Culver\", \"zip\":\"97451\", \"phone\":\"841-874-6512\", \"email\":\"alexbland@email.com\" }"))
+                .andExpect(status().isCreated());
     }
 
-    
-
-
-
+    @Test
+    public void deletePerson_success() throws Exception {
+        mockMvc.perform(delete("/person")
+                        .param("firstName","Jacob")
+                        .param("lastName","Boyd"))
+                .andExpect(status().isOk());
+    }
 }

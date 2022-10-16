@@ -23,12 +23,12 @@ public class PersonController {
     }
 
     @GetMapping("/person")
-    public List<Person>listPersons() {
+    public List<Person> getPerson() {
         return personService.findAllPerson() ;
     }
 
     @PostMapping("/person")
-    public ResponseEntity<Person> newPerson(@RequestBody Person person){
+    public ResponseEntity<Person> postPerson(@RequestBody Person person){
         Person personAdded = personService.save(person);
         if(Objects.isNull(personAdded)){
             return ResponseEntity.noContent().build();
@@ -42,7 +42,7 @@ public class PersonController {
     }
 
     @PutMapping("/person")
-    public ResponseEntity<Person> updatePerson(@RequestParam("firstName")String firstName,@RequestParam("lastName") String lastName,@RequestBody Person person){
+    public ResponseEntity<Person> putPerson(@RequestParam("firstName")String firstName,@RequestParam("lastName") String lastName,@RequestBody Person person){
         Person personAdded = personService.updatePerson(firstName,lastName,person);
         if(Objects.isNull(personAdded)){
             return ResponseEntity.noContent().build();

@@ -33,13 +33,13 @@ public class AlertService implements IAlertService{
         listPerson.forEach(lp -> {
             if (lp.getAddress().equals(address)) {
                 searchfamily.add("firstName: " + lp.getFirstName() + " " +
-                        "lastName: " + lp.getLastname());
+                        "lastName: " + lp.getLastName());
             }
         });
         listPerson.forEach(lp -> {
             if (lp.getAddress().equals(address)) {
                 listMedicalRecord.forEach(lmr -> {
-                    if (lp.getLastname().equals(lmr.getLastName()) && lp.getFirstName().equals(lmr.getFirstName())) {
+                    if (lp.getLastName().equals(lmr.getLastName()) && lp.getFirstName().equals(lmr.getFirstName())) {
                         if (lmr.getAge() < 19) {
                             result.add(new ChildAlertDTO(lmr.getFirstName(),lmr.getLastName(),lmr.getAge(), searchfamily));
 
@@ -85,7 +85,7 @@ public class AlertService implements IAlertService{
         listPerson.forEach(lp->{
             if (lp.getAddress().equals(address)){
                 listmedicalRecord.forEach(lmr->{
-                    if (lmr.getLastName().equals(lp.getLastname()) && lmr.getFirstName().equals(lp.getFirstName())){
+                    if (lmr.getLastName().equals(lp.getLastName()) && lmr.getFirstName().equals(lp.getFirstName())){
                         listFireStation.forEach(lf->{
                             if (lf.getAddress().equals(address)){
                                 result.add(new FireDTO(lmr.getFirstName(),lmr.getLastName(), lp.getAddress(),
@@ -111,7 +111,7 @@ public class AlertService implements IAlertService{
                 listPerson.forEach(lp->{
                     if (lp.getAddress().equals(lf.getAddress())){
                         listMedicalRecord.forEach(lmr->{
-                            if(lmr.getLastName().equals(lp.getLastname()) && lmr.getFirstName().equals(lp.getFirstName())){
+                            if(lmr.getLastName().equals(lp.getLastName()) && lmr.getFirstName().equals(lp.getFirstName())){
                                 result.add(new FloodDTO(lf.getAddress(), lf.getStation(), lmr.getFirstName(),lmr.getLastName(),lp.getPhone(),
                                         lmr.getAge(),lmr.getMedications(),lmr.getAllergies()));
                             }
@@ -129,10 +129,10 @@ public class AlertService implements IAlertService{
         List<MedicalRecord> listMedicalRecord = loadData.findAllMedicalRecord();
         List<PersonInfoDTO> result=new ArrayList<>();
         listPerson.forEach(lp->{
-            if (lp.getLastname().equals(lastName) && lp.getFirstName().equals(firstName)) {
+            if (lp.getLastName().equals(lastName) && lp.getFirstName().equals(firstName)) {
                 listMedicalRecord.forEach(lmr->{
-                    if(lp.getLastname().equals(lmr.getLastName()) && lp.getFirstName().equals(lmr.getFirstName())){
-                        result.add(new PersonInfoDTO(lp.getFirstName(),lp.getLastname(),lp.getAddress(),
+                    if(lp.getLastName().equals(lmr.getLastName()) && lp.getFirstName().equals(lmr.getFirstName())){
+                        result.add(new PersonInfoDTO(lp.getFirstName(),lp.getLastName(),lp.getAddress(),
                                 lp.getCity(), lp.getEmail(), lmr.getAge(), lmr.getMedications(), lmr.getAllergies()));
                     }
                 });

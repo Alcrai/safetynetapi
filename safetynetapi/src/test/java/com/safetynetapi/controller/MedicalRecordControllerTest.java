@@ -1,49 +1,71 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.model.MedicalRecord;
-import com.safetynetapi.model.Person;
-import com.safetynetapi.service.IMedicalRecordService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class MedicalRecordControllerTest {
-    @Mock
-    private IMedicalRecordService medicalRecordService;
+    @Autowired
+    private MockMvc mockMvc;
 
-    private MedicalRecordController medicalRecordController;
-
-    private List<MedicalRecord> medicalRecords;
-    private MedicalRecord medicalRecord;
-
-    @BeforeEach
-    public void init(){
-        medicalRecordController = new MedicalRecordController(medicalRecordService);
-        medicalRecords = new ArrayList<>();
-        medicalRecord = new MedicalRecord("Alex","Blandio","03/06/2020", "[\"aznol:350mg\", \"hydrapermazol:100mg\"]", "[\"nillacilan\"]");
-        medicalRecords.add(medicalRecord);
+    @Test
+    public void getMedicalRecord_success() throws Exception {
+        mockMvc.perform(get("/medicalRecord"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].firstName", is("John")))
+                .andExpect(jsonPath("$[0].lastName", is("Boyd")))
+                .andExpect(jsonPath("$[0].birthdate", is("03/06/1984")))
+                .andExpect(jsonPath("$[0].medications", is("[\"aznol:350mg\", \"hydrapermazol:100mg\"]")))
+                .andExpect(jsonPath("$[0].allergies", is("[\"nillacilan\"]")));
     }
 
     @Test
-    public void ListMedicalRecordsReturnAList(){
-        when(medicalRecordService.findAllMedicalRecord()).thenReturn(medicalRecords);
-        assertThat(medicalRecordController.listMedicalRecord()).size().isEqualTo(1);
-        verify(medicalRecordService).findAllMedicalRecord();
+    public void postMedicalRecord_success() throws Exception {
+        mockMvc.perform(post("/medicalRecord")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "        \"firstName\": \"Alex\",\n" +
+                                "        \"lastName\": \"Bland\",\n" +
+                                "        \"birthdate\": \"03/06/1984\",\n" +
+                                "        \"medications\": \"[\\\"aznol:350mg\\\", \\\"hydrapermazol:100mg\\\"]\",\n" +
+                                "        \"allergies\": \"[\\\"nillacilan\\\"]\",\n" +
+                                "        \"age\": 38\n" +
+                                "    }"))
+                .andExpect(status().isCreated());
     }
+
     @Test
-    public void deletePersonTestReturnMap(){
-        when(medicalRecordService.deleteMedicalRecord("Alex","Blandio")).thenReturn(medicalRecord);
-        assertThat(medicalRecordController.deleteMedicalRecord("Alex","Blandio")).hasSize(1);
-        verify(medicalRecordService).deleteMedicalRecord("Alex","Blandio");
+    public void putMedicalRecord_success() throws Exception {
+        mockMvc.perform(put("/medicalRecord")
+                        .param("firstName","Tenley")
+                        .param("lastName","Boyd")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "        \"firstName\": \"Alex\",\n" +
+                                "        \"lastName\": \"Bland\",\n" +
+                                "        \"birthdate\": \"23/10/1978\",\n" +
+                                "        \"medications\": \"[\\\"aznol:350mg\\\", \\\"hydrapermazol:100mg\\\"]\",\n" +
+                                "        \"allergies\": \"[\\\"nillacilan\\\"]\",\n" +
+                                "        \"age\": 38\n" +
+                                "    }"))
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void deleteMedicalRecord_success() throws Exception {
+        mockMvc.perform(delete("/medicalRecord")
+                        .param("firstName","Jacob")
+                        .param("lastName","Boyd"))
+                .andExpect(status().isOk());
     }
 }

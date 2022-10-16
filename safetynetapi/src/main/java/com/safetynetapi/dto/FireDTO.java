@@ -3,7 +3,7 @@ package com.safetynetapi.dto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class FireDTO {
-    private String firstname;
+    private String firstName;
     private String lastName;
     private String address;
     private String city;
@@ -12,8 +12,8 @@ public class FireDTO {
     private int age;
     private String medications;
     private String allergies;
-    public FireDTO(String firstname, String lastName, String address, String city, String station, String phone, int age, String medications, String allergies) {
-        this.firstname = firstname;
+    public FireDTO(String firstName, String lastName, String address, String city, String station, String phone, int age, String medications, String allergies) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.city = city;

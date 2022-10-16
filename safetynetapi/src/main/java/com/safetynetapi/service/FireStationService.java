@@ -33,9 +33,9 @@ public class FireStationService implements IFireStationService{
                 String address = lf.getAddress();
                 listPerson.forEach(p -> {
                     if (p.getAddress().equals(address)) {
-                        result.add(new FireStationDTO(p.getFirstName(),p.getLastname(),p.getAddress(), p.getCity(),p.getPhone()));
+                        result.add(new FireStationDTO(p.getFirstName(),p.getLastName(),p.getAddress(), p.getCity(),p.getPhone()));
                         listMedicalRecord.forEach(lmr->{
-                            if(lmr.getFirstName().equals(p.getFirstName()) && lmr.getLastName().equals(p.getLastname())){
+                            if(lmr.getFirstName().equals(p.getFirstName()) && lmr.getLastName().equals(p.getLastName())){
                                 if (lmr.getAge()>18){
                                     countAdult[0]++;
                                 }else {

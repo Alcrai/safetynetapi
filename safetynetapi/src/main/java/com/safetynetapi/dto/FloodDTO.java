@@ -7,7 +7,7 @@ public class FloodDTO {
     String address;
     String station;
     String firstName;
-    String LastName;
+    String lastName;
     String phone;
     int age;
     String medications;
@@ -17,7 +17,7 @@ public class FloodDTO {
         this.address = address;
         this.station = station;
         this.firstName = firstName;
-        this.LastName = lastName;
+        this.lastName = lastName;
         this.phone = phone;
         this.age = age;
         this.medications = medications;

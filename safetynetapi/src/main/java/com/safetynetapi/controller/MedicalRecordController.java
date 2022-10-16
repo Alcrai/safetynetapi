@@ -19,12 +19,12 @@ public class MedicalRecordController {
     }
 
     @GetMapping("/medicalRecord")
-    public List<MedicalRecord> listMedicalRecord(){
+    public List<MedicalRecord> getMedicalRecord(){
         return medicalRecordService.findAllMedicalRecord();
     }
 
     @PostMapping("/medicalRecord")
-    public ResponseEntity<MedicalRecord> newMedicalRecord(@RequestBody MedicalRecord medicalRecord){
+    public ResponseEntity<MedicalRecord> postMedicalRecord(@RequestBody MedicalRecord medicalRecord){
         MedicalRecord medicalRecordAdded = medicalRecordService.saveMedicalRecord(medicalRecord);
         if(Objects.isNull(medicalRecordAdded)){
             return ResponseEntity.noContent().build();
@@ -38,7 +38,7 @@ public class MedicalRecordController {
     }
 
     @PutMapping("/medicalRecord")
-    public ResponseEntity<MedicalRecord> updateMedicalRecord(@RequestParam("firstName")String firstName,@RequestParam("lastName") String lastName,@RequestBody MedicalRecord medicalRecord){
+    public ResponseEntity<MedicalRecord> putMedicalRecord(@RequestParam("firstName")String firstName,@RequestParam("lastName") String lastName,@RequestBody MedicalRecord medicalRecord){
         MedicalRecord medicalRecordAdded = medicalRecordService.updateMedicalRecord(firstName,lastName,medicalRecord);
         if(Objects.isNull(medicalRecordAdded)){
             return ResponseEntity.noContent().build();

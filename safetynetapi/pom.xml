@@ -86,6 +86,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 
@@ -150,7 +156,7 @@
 							<excludes>
 								<exclude>com/safetynetapi/dto/*</exclude>
 								<exclude>com/safetynetapi/model/*</exclude>
-								<exclude>com/safetynetapi/safetynetapi/*</exclude>
+								<exclude>com/safetynetapi/*</exclude>
 							</excludes>
 						</configuration>
 					</execution>
@@ -208,7 +214,7 @@
 					<excludes>
 						<exclude>com/safetynetapi/dto/*</exclude>
 						<exclude>com/safetynetapi/model/*</exclude>
-						<exclude>com/safetynetapi/safetynetapi/*</exclude>
+						<exclude>com/safetynetapi/*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

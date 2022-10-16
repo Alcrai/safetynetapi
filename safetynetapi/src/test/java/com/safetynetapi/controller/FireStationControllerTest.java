@@ -1,60 +1,70 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.dto.FireStationDTO;
-import com.safetynetapi.model.FireStation;
-import com.safetynetapi.model.Person;
-import com.safetynetapi.service.IFireStationService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-@ExtendWith(MockitoExtension.class)
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+@SpringBootTest
+@AutoConfigureMockMvc
 public class FireStationControllerTest {
-    @Mock
-    private IFireStationService fireStationService;
+    @Autowired
+    private MockMvc mockMvc;
 
-    private FireStationController fireStationController;
-
-    private List<FireStation> fireStations;
-    private FireStation fireStation;
-
-    @BeforeEach
-    public void init(){
-        fireStationController = new FireStationController(fireStationService);
-        fireStations = new ArrayList<>();
-        fireStation = new FireStation("1 Culver St","6");
-        fireStations.add(fireStation);
+    @Test
+    public void getFireStation_success() throws Exception {
+        mockMvc.perform(get("/firestation").param("stationNumber","3"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(14)))
+                .andExpect(jsonPath("$[0].firstName", is("John")))
+                .andExpect(jsonPath("$[0].lastName", is("Boyd")))
+                .andExpect(jsonPath("$[0].address", is("1509 Culver St")))
+                .andExpect(jsonPath("$[0].city", is("Culver")))
+                .andExpect(jsonPath("$[0].phone", is("841-874-6512")))
+                .andExpect(jsonPath("$[0].numberOfAdult", is(0)))
+                .andExpect(jsonPath("$[0].numberOfChildren", is(0)));
     }
 
     @Test
-    public void ListofPersonStationReturnAList(){
-        FireStationDTO fireStationDTO = new FireStationDTO("Alex","Blandio","1 Culver St","Culver","123-123-123",1,0);
-        List<FireStationDTO> fireStationDTOList = new ArrayList<>();
-        fireStationDTOList.add(fireStationDTO);
-        when(fireStationService.personOfStationService("6")).thenReturn(fireStationDTOList);
-        assertThat(fireStationController.listOfPersonOfStation("6")).size().isEqualTo(1);
-        verify(fireStationService).personOfStationService("6");
+    public void getFireStationList_success() throws Exception {
+        mockMvc.perform(get("/firestationList"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(13)))
+                .andExpect(jsonPath("$[0].address", is("1509 Culver St")))
+                .andExpect(jsonPath("$[0].station", is("3")));
     }
 
     @Test
-    public void ListFireStationReturnAList(){
-        when(fireStationService.fireStationList()).thenReturn(fireStations);
-        assertThat(fireStationController.ListStation()).size().isEqualTo(1);
-        verify(fireStationService).fireStationList();
+    public void postFireStation_success() throws Exception {
+        mockMvc.perform(post("/firestation")
+                        .contentType(MediaType.APPLICATION_JSON)
+                .content("{ \"address\":\"1 Culver St\", \"station\":\"5\" }"))
+                .andExpect(status().isCreated());
     }
 
     @Test
-    public void deletePersonTestReturnMap(){
-        when(fireStationService.delete("1 Culver St","6")).thenReturn(fireStation);
-        assertThat(fireStationController.deleteFirestation("1 Culver St","6")).hasSize(1);
-        verify(fireStationService).delete("1 Culver St","6");
+    public void putFireStation_success() throws Exception {
+        mockMvc.perform(put("/firestation")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("address","1509 Culver St")
+                        .param("station","6"))
+                .andExpect(status().isCreated());
     }
+
+    @Test
+    public void deleteFireStation_success() throws Exception {
+        mockMvc.perform(delete("/firestation")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .param("address","1509 Culver St")
+                        .param("station","6"))
+                .andExpect(status().isOk());
+    }
+
 }

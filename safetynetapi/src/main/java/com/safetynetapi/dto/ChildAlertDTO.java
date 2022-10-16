@@ -8,13 +8,13 @@ import java.util.List;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ChildAlertDTO {
     private String firstName;
-    private String lastname;
+    private String lastName;
     private int age;
     private List<String> family;
 
-    public ChildAlertDTO(String firstName, String lastname, int age, List<String> family) {
+    public ChildAlertDTO(String firstName, String lastName, int age, List<String> family) {
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.age = age;
         this.family = new ArrayList<String>(family);
     }

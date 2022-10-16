@@ -15,8 +15,8 @@ public class LoadDAO implements ILoadDAO {
     private List<MedicalRecord> medicalRecords;
     private ILoadingData loadingData;
 
-    public LoadDAO() {
-        loadingData = new LoadingDataJson();
+    public LoadDAO(ILoadingData loadingData) {
+        this.loadingData=loadingData;
         this.persons = loadingData.getPersons();
         this.fireStations = loadingData.getFireStations();
         this.medicalRecords = loadingData.getMedicalRecords();
@@ -56,23 +56,14 @@ public class LoadDAO implements ILoadDAO {
 
     @Override
     public FireStation deleteFireStation(String address, String station) {
-       List<FireStation> updateFireStation =new ArrayList<>();
-       if(!address.isEmpty()){
-               fireStations.forEach(lf->{
-                   if(!lf.getAddress().equals(address)){
-                       updateFireStation.add(lf);
-                   }
-               });
+        List<FireStation> updateFireStation =new ArrayList<>();
+       fireStations.forEach(fs->{
+           if (!fs.getAddress().equals(address)){
+               updateFireStation.add(fs);
            }
-        if(!station.isEmpty()){
-            fireStations.forEach(lf->{
-                if(!lf.getStation().equals(station)){
-                    updateFireStation.add(lf);
-                }
-            });
-        }
+       });
         this.fireStations = updateFireStation;
-        return new FireStation(address, station);
+        return new FireStation(address,station);
     }
 
     @Override
@@ -84,7 +75,7 @@ public class LoadDAO implements ILoadDAO {
     @Override
     public Person updatePerson(String firstName, String lastName, Person person) {
         persons.forEach(p->{
-            if(p.getFirstName().equals(firstName) && p.getLastname().equals(lastName)){
+            if(p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)){
                 p.setAddress(person.getAddress());
                 p.setCity(person.getCity());
                 p.setZip(person.getZip());
@@ -100,7 +91,7 @@ public class LoadDAO implements ILoadDAO {
         final Person[] result = {new Person()};
         List<Person> updatePerson= new ArrayList<>();
         persons.forEach(p->{
-            if(p.getFirstName().equals(firstName)&& p.getLastname().equals(lastName)){
+            if(p.getFirstName().equals(firstName)&& p.getLastName().equals(lastName)){
                 result[0] = p;
             }else{
                 updatePerson.add(p);
