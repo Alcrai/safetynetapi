@@ -49,6 +49,49 @@
 			<version>3.23.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!--Ajout de dependence pour les test integration -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>5.3.3</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-library</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.5.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 
@@ -113,7 +156,7 @@
 							<excludes>
 								<exclude>com/safetynetapi/dto/*</exclude>
 								<exclude>com/safetynetapi/model/*</exclude>
-								<exclude>com/safetynetapi/safetynetapi/*</exclude>
+								<exclude>com/safetynetapi/*</exclude>
 							</excludes>
 						</configuration>
 					</execution>
@@ -167,6 +210,13 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.8</version>
+				<configuration>
+					<excludes>
+						<exclude>com/safetynetapi/dto/*</exclude>
+						<exclude>com/safetynetapi/model/*</exclude>
+						<exclude>com/safetynetapi/*</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 
 

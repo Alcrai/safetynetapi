@@ -1,9 +1,9 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.dto.ChildAlertDto;
-import com.safetynetapi.dto.FireDto;
-import com.safetynetapi.dto.FloodDto;
-import com.safetynetapi.dto.PersonInfoDto;
+import com.safetynetapi.dto.ChildAlertDTO;
+import com.safetynetapi.dto.FireDTO;
+import com.safetynetapi.dto.FloodDTO;
+import com.safetynetapi.dto.PersonInfoDTO;
 import com.safetynetapi.service.AlertService;
 import com.safetynetapi.service.IAlertService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,37 +18,46 @@ import java.util.Set;
 public class AlertController {
     private IAlertService alertService;
     @Autowired
-    public AlertController(AlertService alertService) {
+    public AlertController(IAlertService alertService) {
         this.alertService = alertService;
     }
 
     @GetMapping("/childAlert")
-    public List<ChildAlertDto> listChildAlert(@RequestParam("address") String address){
+    public List<ChildAlertDTO> getChildAlert(@RequestParam("address") String address){
         return alertService.childAlertService(address);
     }
 
     @GetMapping("/phoneAlert")
+<<<<<<< HEAD
     public Set<String> listPhoneAlert(@RequestParam("firestation") String fireStationNumber){
+=======
+    public Set<String> getPhoneAlert(@RequestParam("firestation") String fireStationNumber){
+>>>>>>> featureTest
         return alertService.phoneAlertService(fireStationNumber);
     }
 
     @GetMapping("/fire")
-    public List<FireDto> listFire(@RequestParam("address") String address){
+    public List<FireDTO> getFire(@RequestParam("address") String address){
         return alertService.fireService(address);
     }
 
     @GetMapping("/flood/stations")
-    public List<FloodDto> listPersonOfStation(@RequestParam("stations") String stations){
+    public List<FloodDTO> getFloodStation(@RequestParam("stations") String stations){
         return alertService.personOfStationService(stations);
     }
 
     @GetMapping("/personInfo")
-    public List<PersonInfoDto> listPersonWithMedicalRecord(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
+    public List<PersonInfoDTO> getPersoninfo(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
         return alertService.personWithMedicalRecordService(firstName,lastName);
     }
 
     @GetMapping("/communityEmail")
+<<<<<<< HEAD
     public Set<String> listEmailPerCity(@RequestParam("city") String city){
         return alertService.EmailPerCityService(city);
+=======
+    public Set<String> getCommunityEmail(@RequestParam("city") String city){
+        return alertService.emailPerCityService(city);
+>>>>>>> featureTest
     }
 }

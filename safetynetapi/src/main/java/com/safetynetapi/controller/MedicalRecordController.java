@@ -1,8 +1,6 @@
 package com.safetynetapi.controller;
 
 import com.safetynetapi.model.MedicalRecord;
-import com.safetynetapi.model.Person;
-import com.safetynetapi.repository.ILoadData;
 import com.safetynetapi.service.IMedicalRecordService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +19,12 @@ public class MedicalRecordController {
     }
 
     @GetMapping("/medicalRecord")
-    public List<MedicalRecord> listMedicalRecord(){
+    public List<MedicalRecord> getMedicalRecord(){
         return medicalRecordService.findAllMedicalRecord();
     }
 
     @PostMapping("/medicalRecord")
-    public ResponseEntity<MedicalRecord> newMedicalRecord(@RequestBody MedicalRecord medicalRecord){
+    public ResponseEntity<MedicalRecord> postMedicalRecord(@RequestBody MedicalRecord medicalRecord){
         MedicalRecord medicalRecordAdded = medicalRecordService.saveMedicalRecord(medicalRecord);
         if(Objects.isNull(medicalRecordAdded)){
             return ResponseEntity.noContent().build();
@@ -40,7 +38,7 @@ public class MedicalRecordController {
     }
 
     @PutMapping("/medicalRecord")
-    public ResponseEntity<MedicalRecord> updateMedicalRecord(@RequestParam("firstName")String firstName,@RequestParam("lastName") String lastName,@RequestBody MedicalRecord medicalRecord){
+    public ResponseEntity<MedicalRecord> putMedicalRecord(@RequestParam("firstName")String firstName,@RequestParam("lastName") String lastName,@RequestBody MedicalRecord medicalRecord){
         MedicalRecord medicalRecordAdded = medicalRecordService.updateMedicalRecord(firstName,lastName,medicalRecord);
         if(Objects.isNull(medicalRecordAdded)){
             return ResponseEntity.noContent().build();
@@ -54,7 +52,7 @@ public class MedicalRecordController {
     }
 
     @DeleteMapping("/medicalRecord")
-    public Map<String,Boolean> deletePerson(@RequestParam("firstName") String firstName, @RequestParam("lastName")String lastName){
+    public Map<String,Boolean> deleteMedicalRecord(@RequestParam("firstName") String firstName, @RequestParam("lastName")String lastName){
         MedicalRecord medicalRecordDelete = medicalRecordService.deleteMedicalRecord(firstName,lastName);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

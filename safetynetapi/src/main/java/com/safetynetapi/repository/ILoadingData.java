@@ -8,11 +8,7 @@ import java.util.List;
 
 public interface ILoadingData {
     List<Person> getPersons();
-
     List<FireStation> getFireStations();
-
     List<MedicalRecord> getMedicalRecords();
-
-
 
 }

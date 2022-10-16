@@ -6,45 +6,20 @@ import com.safetynetapi.model.Person;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Repository
-public class LoadData implements ILoadData{
-    public List<Person> persons;
-    public List<FireStation> fireStations;
-    public List<MedicalRecord> medicalRecords;
+public class LoadDAO implements ILoadDAO {
+    private List<Person> persons;
+    private List<FireStation> fireStations;
+    private List<MedicalRecord> medicalRecords;
     private ILoadingData loadingData;
 
-    public LoadData() {
-        loadingData = new LoadingDataJson();
+    public LoadDAO(ILoadingData loadingData) {
+        this.loadingData=loadingData;
         this.persons = loadingData.getPersons();
         this.fireStations = loadingData.getFireStations();
         this.medicalRecords = loadingData.getMedicalRecords();
-    }
-
-    public List<Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
-    public List<FireStation> getFireStations() {
-        return fireStations;
-    }
-
-    public void setFireStations(List<FireStation> fireStations) {
-        this.fireStations = fireStations;
-    }
-
-    public List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
-    }
-
-    public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
-        this.medicalRecords = medicalRecords;
     }
 
     @Override
@@ -81,23 +56,14 @@ public class LoadData implements ILoadData{
 
     @Override
     public FireStation deleteFireStation(String address, String station) {
-       List<FireStation> updateFireStation =new ArrayList<>();
-       if(!address.isEmpty()){
-               fireStations.forEach(lf->{
-                   if(!lf.getAddress().equals(address)){
-                       updateFireStation.add(lf);
-                   }
-               });
+        List<FireStation> updateFireStation =new ArrayList<>();
+       fireStations.forEach(fs->{
+           if (!fs.getAddress().equals(address)){
+               updateFireStation.add(fs);
            }
-        if(!station.isEmpty()){
-            fireStations.forEach(lf->{
-                if(!lf.getStation().equals(station)){
-                    updateFireStation.add(lf);
-                }
-            });
-        }
+       });
         this.fireStations = updateFireStation;
-        return new FireStation(address, station);
+        return new FireStation(address,station);
     }
 
     @Override
@@ -109,7 +75,7 @@ public class LoadData implements ILoadData{
     @Override
     public Person updatePerson(String firstName, String lastName, Person person) {
         persons.forEach(p->{
-            if(p.getFirstName().equals(firstName) && p.getLastname().equals(lastName)){
+            if(p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)){
                 p.setAddress(person.getAddress());
                 p.setCity(person.getCity());
                 p.setZip(person.getZip());
@@ -125,7 +91,7 @@ public class LoadData implements ILoadData{
         final Person[] result = {new Person()};
         List<Person> updatePerson= new ArrayList<>();
         persons.forEach(p->{
-            if(p.getFirstName().equals(firstName)&& p.getLastname().equals(lastName)){
+            if(p.getFirstName().equals(firstName)&& p.getLastName().equals(lastName)){
                 result[0] = p;
             }else{
                 updatePerson.add(p);

@@ -1,24 +1,24 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.ChildAlertDto;
-import com.safetynetapi.dto.FloodDto;
-import com.safetynetapi.dto.FireDto;
-import com.safetynetapi.dto.PersonInfoDto;
+import com.safetynetapi.dto.ChildAlertDTO;
+import com.safetynetapi.dto.FloodDTO;
+import com.safetynetapi.dto.FireDTO;
+import com.safetynetapi.dto.PersonInfoDTO;
 
 import java.util.List;
 import java.util.Set;
 
 public interface IAlertService {
 
-    List<ChildAlertDto> childAlertService(String address);
+    List<ChildAlertDTO> childAlertService(String address);
 
     Set<String> phoneAlertService(String fireStationNumber);
 
-    List<FireDto> fireService(String address);
+    List<FireDTO> fireService(String address);
 
-    List<FloodDto> personOfStationService(String stations);
+    List<FloodDTO> personOfStationService(String stations);
 
-    List<PersonInfoDto> personWithMedicalRecordService(String firstName, String lastName);
+    List<PersonInfoDTO> personWithMedicalRecordService(String firstName, String lastName);
 
-    Set<String> EmailPerCityService(String city);
+    Set<String> emailPerCityService(String city);
 }

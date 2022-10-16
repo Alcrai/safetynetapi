@@ -14,12 +14,12 @@ public class FireStation {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getStation() {
         return station;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setStation(String station) {

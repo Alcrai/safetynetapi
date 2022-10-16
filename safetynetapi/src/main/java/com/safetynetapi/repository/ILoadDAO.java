@@ -6,7 +6,7 @@ import com.safetynetapi.model.Person;
 
 import java.util.List;
 
-public interface ILoadData {
+public interface ILoadDAO {
     List<Person> findAllPerson();
 
     List<FireStation> findAllFireStation();

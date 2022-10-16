@@ -1,6 +1,6 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.dto.FireStationDto;
+import com.safetynetapi.dto.FireStationDTO;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.service.IFireStationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,21 @@ public class FireStationController {
     }
 
     @GetMapping("/firestation")
-    public List<FireStationDto> listOfPersonOfStation(@RequestParam("stationNumber") String station_number){
+    public List<FireStationDTO> getFireStation(@RequestParam("stationNumber") String station_number){
         return fireStationService.personOfStationService(station_number);
     }
 
     @GetMapping("/firestationList")
+<<<<<<< HEAD
     public List<FireStation> listStation(){
+=======
+    public List<FireStation> getFireStationList(){
+>>>>>>> featureTest
         return fireStationService.fireStationList();
     }
 
     @PostMapping("/firestation")
-    public ResponseEntity<FireStation> newFirestation(@RequestBody FireStation firestation){
+    public ResponseEntity<FireStation> postFireStation(@RequestBody FireStation firestation){
         FireStation fireStationAdded = fireStationService.save(firestation);
         if(Objects.isNull(fireStationAdded)){
             return ResponseEntity.noContent().build();
@@ -48,7 +52,7 @@ public class FireStationController {
     }
 
     @PutMapping("/firestation")
-    public ResponseEntity<FireStation> updateFirestation(@RequestParam("address")String address,@RequestParam("station") String station){
+    public ResponseEntity<FireStation> putFireStation(@RequestParam("address")String address,@RequestParam("station") String station){
         FireStation fireStationAdded = fireStationService.update(address,station);
         if(Objects.isNull(fireStationAdded)){
             return ResponseEntity.noContent().build();
@@ -62,7 +66,7 @@ public class FireStationController {
     }
 
     @DeleteMapping("/firestation")
-    public Map<String,Boolean> deleteFirestation(@RequestParam("address")String address, @RequestParam("station") String station){
+    public Map<String,Boolean> deleteFireStation(@RequestParam("address") String address, @RequestParam("station") String station){
         FireStation fireStationDelete = fireStationService.delete(address,station);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

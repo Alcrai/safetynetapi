@@ -1,13 +1,10 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.FireStationDto;
+import com.safetynetapi.dto.FireStationDTO;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
-import com.safetynetapi.repository.ILoadData;
-import com.safetynetapi.repository.ILoadingData;
-import com.safetynetapi.repository.LoadData;
-import com.safetynetapi.repository.LoadingDataJson;
+import com.safetynetapi.repository.ILoadDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +13,19 @@ import java.util.List;
 
 @Service
 public class FireStationService implements IFireStationService{
-    private ILoadData loadData;
+    private ILoadDAO loadData;
 
     @Autowired
-    public FireStationService(ILoadData loadData) {
+    public FireStationService(ILoadDAO loadData) {
        this.loadData = loadData;
     }
 
     @Override
-    public List<FireStationDto> personOfStationService(String station_number){
+    public List<FireStationDTO> personOfStationService(String station_number){
         List<FireStation> listFireStation = loadData.findAllFireStation();
         List<Person> listPerson = loadData.findAllPerson();
         List<MedicalRecord> listMedicalRecord = loadData.findAllMedicalRecord();
-        List<FireStationDto> result = new ArrayList<>();
+        List<FireStationDTO> result = new ArrayList<>();
         final int[] countAdult = {0};
         final int[] countChildren = {0};
         listFireStation.forEach(lf -> {
@@ -36,9 +33,9 @@ public class FireStationService implements IFireStationService{
                 String address = lf.getAddress();
                 listPerson.forEach(p -> {
                     if (p.getAddress().equals(address)) {
-                        result.add(new FireStationDto(p.getFirstName(),p.getLastname(),p.getAddress(), p.getCity(),p.getPhone()));
+                        result.add(new FireStationDTO(p.getFirstName(),p.getLastName(),p.getAddress(), p.getCity(),p.getPhone()));
                         listMedicalRecord.forEach(lmr->{
-                            if(lmr.getFirstName().equals(p.getFirstName()) && lmr.getLastName().equals(p.getLastname())){
+                            if(lmr.getFirstName().equals(p.getFirstName()) && lmr.getLastName().equals(p.getLastName())){
                                 if (lmr.getAge()>18){
                                     countAdult[0]++;
                                 }else {
@@ -50,7 +47,7 @@ public class FireStationService implements IFireStationService{
                 });
             }
         });
-        result.add(new FireStationDto( "","","","","",countAdult[0], countChildren[0]));
+        result.add(new FireStationDTO( "","","","","",countAdult[0], countChildren[0]));
         return result;
     }
 

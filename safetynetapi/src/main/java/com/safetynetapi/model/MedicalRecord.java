@@ -1,7 +1,5 @@
 package com.safetynetapi.model;
 
-import org.springframework.stereotype.Repository;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -30,44 +28,40 @@ public class MedicalRecord {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
-    }
-
     public String getMedications() {
         return medications;
-    }
-
-    public void setMedications(String medications) {
-        this.medications = medications;
     }
 
     public String getAllergies() {
         return allergies;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setMedications(String medications) {
+        this.medications = medications;
+    }
+
     public void setAllergies(String allergies) {
         this.allergies = allergies;
     }
 
-    public int getAge() {
-        return age;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     private int calculAge(){

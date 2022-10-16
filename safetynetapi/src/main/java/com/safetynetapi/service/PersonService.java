@@ -1,16 +1,20 @@
 package com.safetynetapi.service;
 
 import com.safetynetapi.model.Person;
+<<<<<<< HEAD
 import com.safetynetapi.repository.ILoadData;
+=======
+import com.safetynetapi.repository.ILoadDAO;
+>>>>>>> featureTest
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class PersonService implements IPersonService{
-   private ILoadData loadData;
+   private ILoadDAO loadData;
     @Autowired
-    public PersonService(ILoadData loadData) {
+    public PersonService(ILoadDAO loadData) {
         this.loadData = loadData;
     }
     @Override

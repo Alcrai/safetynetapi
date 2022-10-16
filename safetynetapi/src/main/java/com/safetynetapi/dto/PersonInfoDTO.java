@@ -3,8 +3,8 @@ package com.safetynetapi.dto;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class PersonInfoDto {
-    private String firstname;
+public class PersonInfoDTO {
+    private String firstName;
     private String lastName;
     private String address;
     private String city;
@@ -13,8 +13,8 @@ public class PersonInfoDto {
     private String medications;
     private String allergies;
 
-    public PersonInfoDto(String firstname, String lastName, String address, String city, String mail, int age, String medications, String allergies) {
-        this.firstname = firstname;
+    public PersonInfoDTO(String firstName, String lastName, String address, String city, String mail, int age, String medications, String allergies) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.city = city;

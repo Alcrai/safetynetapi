@@ -5,6 +5,9 @@ import com.jsoniter.any.Any;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,13 +15,17 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
+
 public class LoadingDataJson implements ILoadingData {
     private List<Person> persons ;
     private List<FireStation> fireStations;
     private List<MedicalRecord> medicalRecords;
+   /* @Value("${file.path}")*/
+    private String filePath ="d:/safetynetapi/safetynetapi/src/main/resources/data.json" ;
 
-    private String filePath = "safetynetapi/src/main/resources/data.json";
 
+    @Autowired
     public LoadingDataJson() {
         this.persons = this.findAllPerson();
         this.fireStations = this.findAllFireStation();
@@ -28,6 +35,7 @@ public class LoadingDataJson implements ILoadingData {
     public List<Person> findAllPerson()  {
 
         byte[] bytesFile = new byte[0];
+
         try {
             bytesFile = Files.readAllBytes(new File(filePath).toPath());
         } catch (IOException e) {
@@ -120,7 +128,6 @@ public class LoadingDataJson implements ILoadingData {
         return medicalRecords;
     }
 }
-
 
 
 

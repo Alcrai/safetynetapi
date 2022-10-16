@@ -1,13 +1,13 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.FireStationDto;
+import com.safetynetapi.dto.FireStationDTO;
 import com.safetynetapi.model.FireStation;
 
 import java.util.List;
 
 public interface IFireStationService {
 
-    List<FireStationDto> personOfStationService(String station_number);
+    List<FireStationDTO> personOfStationService(String station_number);
     FireStation save(FireStation fireStation);
 
     List<FireStation> fireStationList();

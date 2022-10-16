@@ -1,10 +1,10 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.ChildAlertDto;
+import com.safetynetapi.dto.ChildAlertDTO;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
-import com.safetynetapi.repository.ILoadData;
+import com.safetynetapi.repository.ILoadDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class AlertServiceTest {
 
     @Mock
-    private ILoadData loadData;
+    private ILoadDAO loadData;
 
     private AlertService alertService;
 
@@ -51,12 +51,12 @@ public class AlertServiceTest {
         when(loadData.findAllMedicalRecord()).thenReturn(medicalRecords);
         List<String> family = new ArrayList<>();
         family.add("firstName: Cat lastName: Blandio");
-       List<ChildAlertDto> child =new ArrayList<>();
-       child.add(new ChildAlertDto("Alex","Blandio",2,family));
+        List<ChildAlertDTO> child =new ArrayList<>();
+        child.add(new ChildAlertDTO("Alex","Blandio",2,family));
 
-       assertThat(alertService.childAlertService("1509 Culver St").size()).isEqualTo(child.size());
-       verify(loadData).findAllPerson();
-       verify(loadData).findAllMedicalRecord();
+        assertThat(alertService.childAlertService("1509 Culver St").size()).isEqualTo(child.size());
+        verify(loadData).findAllPerson();
+        verify(loadData).findAllMedicalRecord();
     }
 
     @Test
@@ -105,10 +105,10 @@ public class AlertServiceTest {
     }
 
     @Test
-    public void EmailPerCityServiceReturnTwoMail(){
+    public void emailPerCityServiceReturnTwoMail(){
         when(loadData.findAllPerson()).thenReturn(persons);
         String city = "Culver";
-        assertThat(alertService.EmailPerCityService(city)).size().isEqualTo(2);
+        assertThat(alertService.emailPerCityService(city)).size().isEqualTo(2);
         verify(loadData).findAllPerson();
     }
 
