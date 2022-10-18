@@ -5,8 +5,9 @@ import com.jsoniter.any.Any;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -21,10 +22,9 @@ public class LoadingDataJson implements ILoadingData {
     private List<Person> persons ;
     private List<FireStation> fireStations;
     private List<MedicalRecord> medicalRecords;
-   /* @Value("${file.path}")*/
     private String filePath ="d:/safetynetapi/safetynetapi/src/main/resources/data.json" ;
 
-
+    private static final Logger logger = LogManager.getLogger("LoadingDataJson");
     @Autowired
     public LoadingDataJson() {
         this.persons = this.findAllPerson();
@@ -35,19 +35,15 @@ public class LoadingDataJson implements ILoadingData {
     public List<Person> findAllPerson()  {
 
         byte[] bytesFile = new byte[0];
+        Any any = null;
 
         try {
             bytesFile = Files.readAllBytes(new File(filePath).toPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        JsonIterator iter = JsonIterator.parse(bytesFile);
-        Any any = null;
-        try {
+            JsonIterator iter = JsonIterator.parse(bytesFile);
             any = iter.readAny();
+            logger.info("Create List Of Person");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Error the file is Empty");
         }
         Any personAny = any.get("persons");
         persons = new ArrayList<>();
@@ -64,18 +60,15 @@ public class LoadingDataJson implements ILoadingData {
 
     public List<FireStation> findAllFireStation() {
         byte[] bytesFile = new byte[0];
+        Any any = null;
+
         try {
             bytesFile = Files.readAllBytes(new File(filePath).toPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        JsonIterator iter = JsonIterator.parse(bytesFile);
-        Any any = null;
-        try {
+            JsonIterator iter = JsonIterator.parse(bytesFile);
             any = iter.readAny();
+            logger.info("Create List Of FireStation");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Error the file is Empty");
         }
         Any fireStationAny = any.get("firestations");
         fireStations = new ArrayList<>();
@@ -87,18 +80,15 @@ public class LoadingDataJson implements ILoadingData {
 
     public List<MedicalRecord> findAllMedicalRecord() {
         byte[] bytesFile = new byte[0];
+        Any any = null;
+
         try {
             bytesFile = Files.readAllBytes(new File(filePath).toPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        JsonIterator iter = JsonIterator.parse(bytesFile);
-        Any any = null;
-        try {
+            JsonIterator iter = JsonIterator.parse(bytesFile);
             any = iter.readAny();
+            logger.info("Create List Of Medical Record");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Error the file is Empty");
         }
         Any medicalRecordAny = any.get("medicalrecords");
         medicalRecords = new ArrayList<>();
