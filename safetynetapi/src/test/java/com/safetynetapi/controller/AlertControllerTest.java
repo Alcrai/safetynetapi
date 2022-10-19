@@ -25,7 +25,6 @@ public class AlertControllerTest {
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].firstName", is("Tenley")))
                 .andExpect(jsonPath("$[0].lastName", is("Boyd")))
-                .andExpect(jsonPath("$[0].age", is(10)))
                 .andExpect(jsonPath("$[0].family", hasSize(5)));
     }
 
@@ -34,7 +33,7 @@ public class AlertControllerTest {
         mockMvc.perform(get("/phoneAlert").param("firestation", "3"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(7)))
-                .andExpect(jsonPath("$[0]", is("phone : 841-874-6512")));
+                .andExpect(jsonPath("$[0]", is("841-874-6741")));
     }
 
     @Test
@@ -48,7 +47,6 @@ public class AlertControllerTest {
                 .andExpect(jsonPath("$[0].city", is("Culver")))
                 .andExpect(jsonPath("$[0].station", is("3")))
                 .andExpect(jsonPath("$[0].phone", is("841-874-6512")))
-                .andExpect(jsonPath("$[0].age", is(38)))
                 .andExpect(jsonPath("$[0].medications", is("[\"aznol:350mg\", \"hydrapermazol:100mg\"]")))
                 .andExpect(jsonPath("$[0].allergies", is("[\"nillacilan\"]")));
     }
@@ -63,7 +61,6 @@ public class AlertControllerTest {
                 .andExpect(jsonPath("$[0].firstName", is("Peter")))
                 .andExpect(jsonPath("$[0].lastName", is("Duncan")))
                 .andExpect(jsonPath("$[0].phone", is("841-874-6512")))
-                .andExpect(jsonPath("$[0].age", is(22)))
                 .andExpect(jsonPath("$[0].medications", is("[]")))
                 .andExpect(jsonPath("$[0].allergies", is("[\"shellfish\"]")));
     }
@@ -79,7 +76,6 @@ public class AlertControllerTest {
                 .andExpect(jsonPath("$[0].address", is("908 73rd St")))
                 .andExpect(jsonPath("$[0].city", is("Culver")))
                 .andExpect(jsonPath("$[0].mail", is("reg@email.com")))
-                .andExpect(jsonPath("$[0].age", is(43)))
                 .andExpect(jsonPath("$[0].medications", is("[\"thradox:700mg\"]")))
                 .andExpect(jsonPath("$[0].allergies", is("[\"illisoxian\"]")));
     }

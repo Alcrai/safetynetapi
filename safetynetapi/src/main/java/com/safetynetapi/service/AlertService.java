@@ -1,9 +1,6 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.ChildAlertDTO;
-import com.safetynetapi.dto.FireDTO;
-import com.safetynetapi.dto.FloodDTO;
-import com.safetynetapi.dto.PersonInfoDTO;
+import com.safetynetapi.dto.*;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
@@ -29,11 +26,10 @@ public class AlertService implements IAlertService{
         List<Person> listPerson = loadData.findAllPerson();
         List<MedicalRecord> listMedicalRecord = loadData.findAllMedicalRecord();
         List<ChildAlertDTO> result = new ArrayList<>();
-        List<String> searchfamily = new ArrayList<>();
+        List<PersonDTO> searchfamily = new ArrayList<>();
         listPerson.forEach(lp -> {
             if (lp.getAddress().equals(address)) {
-                searchfamily.add("firstName: " + lp.getFirstName() + " " +
-                        "lastName: " + lp.getLastName());
+                searchfamily.add(new PersonDTO(lp.getFirstName(), lp.getLastName()));
             }
         });
         listPerson.forEach(lp -> {
@@ -56,19 +52,11 @@ public class AlertService implements IAlertService{
         List<Person> listPerson =   loadData.findAllPerson();
         List<FireStation> listFireStation= loadData.findAllFireStation();
         Set<String> result=new HashSet<String>();
-       /* List<String> address = listFireStation.stream()
-                .filter(e->e.getStation().equals(fireStationNumber))
-                .map(e->e.getAddress())
-                .collect(Collectors.toList());
-        result =  listPerson.stream()
-                .filter(e->e.getAddress().equals(address.stream()))
-                .map(e-> e.getPhone())
-                .collect(Collectors.toSet());*/
-       listFireStation.forEach(lf->{
+        listFireStation.forEach(lf->{
             if (lf.getStation().equals(fireStationNumber)){
                 listPerson.forEach(lp->{
                     if (lp.getAddress().equals(lf.getAddress())){
-                        result.add("phone : "+ lp.getPhone());
+                        result.add(lp.getPhone());
                     }
                 });
             }

@@ -29,6 +29,19 @@ public class FireStationDTO {
         this.numberOfAdult = numberOfAdult;
         this.numberOfChildren = numberOfChildren;
     }
+
+    @Override
+    public String toString() {
+        return "FireStationDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", phone='" + phone + '\'' +
+                ", numberOfAdult=" + numberOfAdult +
+                ", numberOfChildren=" + numberOfChildren +
+                '}';
+    }
 }
 
 

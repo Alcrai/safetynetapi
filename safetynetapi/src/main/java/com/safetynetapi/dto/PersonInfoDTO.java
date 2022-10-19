@@ -23,4 +23,18 @@ public class PersonInfoDTO {
         this.medications = medications;
         this.allergies = allergies;
     }
+
+    @Override
+    public String toString() {
+        return "PersonInfoDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", mail='" + mail + '\'' +
+                ", age=" + age +
+                ", medications='" + medications + '\'' +
+                ", allergies='" + allergies + '\'' +
+                '}';
+    }
 }

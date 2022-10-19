@@ -8,6 +8,8 @@ import com.safetynetapi.model.Person;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -16,17 +18,19 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
+@Component
 
 public class LoadingDataJson implements ILoadingData {
     private List<Person> persons ;
     private List<FireStation> fireStations;
     private List<MedicalRecord> medicalRecords;
-    private String filePath ="d:/safetynetapi/safetynetapi/src/main/resources/data.json" ;
+
+    private String filePath ;
 
     private static final Logger logger = LogManager.getLogger("LoadingDataJson");
     @Autowired
-    public LoadingDataJson() {
+    public LoadingDataJson(@Value("${file.path}") String filePath) {
+        this.filePath = filePath;
         this.persons = this.findAllPerson();
         this.fireStations = this.findAllFireStation();
         this.medicalRecords = this.findAllMedicalRecord();

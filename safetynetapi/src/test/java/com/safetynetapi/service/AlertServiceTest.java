@@ -1,6 +1,7 @@
 package com.safetynetapi.service;
 
 import com.safetynetapi.dto.ChildAlertDTO;
+import com.safetynetapi.dto.PersonDTO;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
@@ -49,11 +50,11 @@ public class AlertServiceTest {
     public void childAlertServiceReturnListOfChildAlertDto(){
         when(loadData.findAllPerson()).thenReturn(persons);
         when(loadData.findAllMedicalRecord()).thenReturn(medicalRecords);
-        List<String> family = new ArrayList<>();
-        family.add("firstName: Cat lastName: Blandio");
+        PersonDTO mom = new PersonDTO("Alex","Blandio");
+        List<PersonDTO> family = new ArrayList<>();
+        family.add(mom);
         List<ChildAlertDTO> child =new ArrayList<>();
         child.add(new ChildAlertDTO("Alex","Blandio",2,family));
-
         assertThat(alertService.childAlertService("1509 Culver St").size()).isEqualTo(child.size());
         verify(loadData).findAllPerson();
         verify(loadData).findAllMedicalRecord();
@@ -64,7 +65,7 @@ public class AlertServiceTest {
         when(loadData.findAllPerson()).thenReturn(persons);
         when(loadData.findAllFireStation()).thenReturn(fireStations);
         String stationNumber="1";
-        assertThat(alertService.phoneAlertService(stationNumber)).first().isEqualTo("phone : 841-874-6512");
+        assertThat(alertService.phoneAlertService(stationNumber)).first().isEqualTo("841-874-6512");
         verify(loadData).findAllPerson();
         verify(loadData).findAllFireStation();
     }

@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
 @Configuration
-@EnableAutoConfiguration
 @ComponentScan("com.safetynetapi.*")
 public class SafetynetapiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SafetynetapiApplication.class, args);
 	}
+
 
 }

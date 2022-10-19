@@ -1,11 +1,7 @@
 package com.safetynetapi.service;
 
 import com.safetynetapi.model.Person;
-<<<<<<< HEAD
-import com.safetynetapi.repository.ILoadData;
-=======
 import com.safetynetapi.repository.ILoadDAO;
->>>>>>> featureTest
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

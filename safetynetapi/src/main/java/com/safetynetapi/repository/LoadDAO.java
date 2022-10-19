@@ -22,6 +22,18 @@ public class LoadDAO implements ILoadDAO {
         this.medicalRecords = loadingData.getMedicalRecords();
     }
 
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
+
+    public void setFireStations(List<FireStation> fireStations) {
+        this.fireStations = fireStations;
+    }
+
+    public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
+        this.medicalRecords = medicalRecords;
+    }
+
     @Override
     public List<Person> findAllPerson() {
         return persons;
@@ -98,7 +110,7 @@ public class LoadDAO implements ILoadDAO {
             }
 
         });
-        this.persons=updatePerson;
+        this.setPersons(updatePerson);
         return result[0];
     }
 

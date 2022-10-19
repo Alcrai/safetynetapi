@@ -23,4 +23,19 @@ public class FireDTO {
         this.medications = medications;
         this.allergies = allergies;
     }
+
+    @Override
+    public String toString() {
+        return "FireDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", station='" + station + '\'' +
+                ", phone='" + phone + '\'' +
+                ", age=" + age +
+                ", medications='" + medications + '\'' +
+                ", allergies='" + allergies + '\'' +
+                '}';
+    }
 }

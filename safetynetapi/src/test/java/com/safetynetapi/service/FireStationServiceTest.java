@@ -3,11 +3,7 @@ package com.safetynetapi.service;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
-<<<<<<< HEAD
-import com.safetynetapi.repository.ILoadData;
-=======
 import com.safetynetapi.repository.ILoadDAO;
->>>>>>> featureTest
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,18 +31,7 @@ public class FireStationServiceTest {
     @BeforeEach
     public void initTest() {
         fireStationService = new FireStationService(loadData);
-<<<<<<< HEAD
-        persons = new ArrayList<>();
-        fireStations = new ArrayList<>();
-        medicalRecords = new ArrayList<>();
-        persons.add(new Person("Alex", "Blandio", "1509 Culver St", "Culver", "97451", "841-874-6512", "alexblandio@email.com"));
-        persons.add(new Person("Cat", "Blandio", "1509 Culver St", "Culver", "97451", "841-874-6512", "catblandio@email.com"));
-        fireStations.add(new FireStation("1509 Culver St", "1"));
-        medicalRecords.add(new MedicalRecord("Alex", "Blandio", "03/06/2020", "[\"aznol:350mg\", \"hydrapermazol:100mg\"]", "[\"nillacilan\"]"));
-        medicalRecords.add(new MedicalRecord("Cat", "Blandio", "03/06/1984", "[\"aznol:350mg\", \"hydrapermazol:100mg\"]", "[\"nillacilan\"]"));
 
-
-=======
         persons=new ArrayList<>();
         fireStations=new ArrayList<>();
         medicalRecords=new ArrayList<>();
@@ -55,7 +40,7 @@ public class FireStationServiceTest {
         fireStations.add(new FireStation("1509 Culver St","1"));
         medicalRecords.add(new MedicalRecord("Alex","Blandio","03/06/2020", "[\"aznol:350mg\", \"hydrapermazol:100mg\"]", "[\"nillacilan\"]"));
         medicalRecords.add(new MedicalRecord("Cat","Blandio","03/06/1984", "[\"aznol:350mg\", \"hydrapermazol:100mg\"]", "[\"nillacilan\"]"));
->>>>>>> featureTest
+
     }
 
     @Test
@@ -71,42 +56,15 @@ public class FireStationServiceTest {
     }
 
     @Test
-<<<<<<< HEAD
-    public void saveFireStationReturnFireStationtoSave() {
-        FireStation fireStation = new FireStation("1 Vosges St", "2");
-=======
+
     public void saveFireStationReturnFireStation(){
         FireStation fireStation = new FireStation("1 Culver St","6");
->>>>>>> featureTest
         when(loadData.saveFireStation(fireStation)).thenReturn(fireStation);
         assertThat(fireStationService.save(fireStation)).isEqualTo(fireStation);
         verify(loadData).saveFireStation(fireStation);
     }
 
     @Test
-<<<<<<< HEAD
-    public void fireStationlistIsCall() {
-        when(loadData.findAllFireStation()).thenReturn(fireStations);
-        assertThat(fireStationService.fireStationList()).isEqualTo(fireStations);
-        verify(loadData).findAllFireStation();
-    }
-
-    @Test
-    public void updateReturnUpdateFireStation(){
-        FireStation fireStation = new FireStation("1509 Culver St","2");
-        when(loadData.updateFireStation("1509 Culver St","2")).thenReturn(fireStation );
-        assertThat(fireStationService.update("1509 Culver St","2")).isEqualTo(fireStation);
-        verify(loadData).updateFireStation("1509 Culver St","2");
-    }
-
-    @Test
-    public void  deleteReturnFireStationDelete(){
-        FireStation fireStation = new FireStation("1509 Culver St","2");
-        when(loadData.deleteFireStation("1509 Culver St","2")).thenReturn(fireStation );
-        assertThat(fireStationService.delete("1509 Culver St","2")).isEqualTo(fireStation);
-        verify(loadData).deleteFireStation("1509 Culver St","2");
-    }
-=======
     public void updateFireStationReturnFireStation(){
         FireStation fireStation = new FireStation("1 Culver St","6");
         when(loadData.updateFireStation("1 Culver St","6")).thenReturn(fireStation);
@@ -128,5 +86,5 @@ public class FireStationServiceTest {
         assertThat(fireStationService.fireStationList()).size().isEqualTo(1);
         verify(loadData).findAllFireStation();
     }
->>>>>>> featureTest
+
 }

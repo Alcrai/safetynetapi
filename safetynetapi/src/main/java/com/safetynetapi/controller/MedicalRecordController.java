@@ -2,13 +2,14 @@ package com.safetynetapi.controller;
 
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.service.IMedicalRecordService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.*;
-
+@Log4j2
 @RestController
 public class MedicalRecordController {
 
@@ -20,19 +21,24 @@ public class MedicalRecordController {
 
     @GetMapping("/medicalRecord")
     public List<MedicalRecord> getMedicalRecord(){
+        log.info("Request:GET /medicalRecord");
+        log.info("Response:");
+        medicalRecordService.findAllMedicalRecord().forEach(as->log.info(as.toString()));
         return medicalRecordService.findAllMedicalRecord();
     }
 
     @PostMapping("/medicalRecord")
     public ResponseEntity<MedicalRecord> postMedicalRecord(@RequestBody MedicalRecord medicalRecord){
         MedicalRecord medicalRecordAdded = medicalRecordService.saveMedicalRecord(medicalRecord);
-        if(Objects.isNull(medicalRecordAdded)){
+        if(Objects.isNull(medicalRecordAdded)) {
             return ResponseEntity.noContent().build();
         }
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .buildAndExpand(medicalRecordAdded)
                 .toUri();
+        log.info("Request:POST /medicalRecord "+ medicalRecord);
+        log.info("Response: "+ ResponseEntity.created(location).build() );
         return ResponseEntity.created(location).build();
 
     }
@@ -47,6 +53,8 @@ public class MedicalRecordController {
                 .fromCurrentRequest()
                 .buildAndExpand(medicalRecordAdded)
                 .toUri();
+        log.info("Request:PUT /medicalRecord "+ medicalRecord);
+        log.info("Response: "+ ResponseEntity.created(location).build() );
         return ResponseEntity.created(location).build();
 
     }
@@ -56,6 +64,8 @@ public class MedicalRecordController {
         MedicalRecord medicalRecordDelete = medicalRecordService.deleteMedicalRecord(firstName,lastName);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
+        log.info("Request:DELETE /medicalRecord?firstName="+firstName+"&lastName="+lastName);
+        log.info("Response: "+ response );
         return response;
     }
 }
