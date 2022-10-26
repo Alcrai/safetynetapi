@@ -1,7 +1,6 @@
 package com.safetynetapi.service;
 
 import com.safetynetapi.model.MedicalRecord;
-import com.safetynetapi.model.Person;
 
 import java.util.List;
 

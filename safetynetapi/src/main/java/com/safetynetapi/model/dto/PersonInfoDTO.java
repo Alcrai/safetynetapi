@@ -1,24 +1,24 @@
-package com.safetynetapi.dto;
+package com.safetynetapi.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class FireDTO {
+public class PersonInfoDTO {
     private String firstName;
     private String lastName;
     private String address;
     private String city;
-    private String station;
-    private String phone;
+    private String mail;
     private int age;
     private String medications;
     private String allergies;
-    public FireDTO(String firstName, String lastName, String address, String city, String station, String phone, int age, String medications, String allergies) {
+
+    public PersonInfoDTO(String firstName, String lastName, String address, String city, String mail, int age, String medications, String allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.city = city;
-        this.station = station;
-        this.phone = phone;
+        this.mail = mail;
         this.age = age;
         this.medications = medications;
         this.allergies = allergies;
@@ -26,13 +26,12 @@ public class FireDTO {
 
     @Override
     public String toString() {
-        return "FireDTO{" +
+        return "PersonInfoDTO{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
-                ", station='" + station + '\'' +
-                ", phone='" + phone + '\'' +
+                ", mail='" + mail + '\'' +
                 ", age=" + age +
                 ", medications='" + medications + '\'' +
                 ", allergies='" + allergies + '\'' +

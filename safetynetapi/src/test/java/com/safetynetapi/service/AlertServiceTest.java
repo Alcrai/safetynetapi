@@ -1,7 +1,7 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.ChildAlertDTO;
-import com.safetynetapi.dto.PersonDTO;
+import com.safetynetapi.model.dto.ChildAlertDTO;
+import com.safetynetapi.model.dto.PersonDTO;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;

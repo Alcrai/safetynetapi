@@ -1,4 +1,4 @@
-package com.safetynetapi.dto;
+package com.safetynetapi.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 

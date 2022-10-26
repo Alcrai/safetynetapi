@@ -1,9 +1,9 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.ChildAlertDTO;
-import com.safetynetapi.dto.FloodDTO;
-import com.safetynetapi.dto.FireDTO;
-import com.safetynetapi.dto.PersonInfoDTO;
+import com.safetynetapi.model.dto.ChildAlertDTO;
+import com.safetynetapi.model.dto.FloodDTO;
+import com.safetynetapi.model.dto.FireDTO;
+import com.safetynetapi.model.dto.PersonInfoDTO;
 
 import java.util.List;
 import java.util.Set;

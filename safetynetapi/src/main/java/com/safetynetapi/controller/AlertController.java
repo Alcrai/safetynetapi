@@ -1,9 +1,9 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.dto.ChildAlertDTO;
-import com.safetynetapi.dto.FireDTO;
-import com.safetynetapi.dto.FloodDTO;
-import com.safetynetapi.dto.PersonInfoDTO;
+import com.safetynetapi.model.dto.ChildAlertDTO;
+import com.safetynetapi.model.dto.FireDTO;
+import com.safetynetapi.model.dto.FloodDTO;
+import com.safetynetapi.model.dto.PersonInfoDTO;
 import com.safetynetapi.service.IAlertService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Set;
+
 @Log4j2
 @RestController
 public class AlertController {

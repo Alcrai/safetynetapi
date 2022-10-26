@@ -1,6 +1,6 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.FireStationDTO;
+import com.safetynetapi.model.dto.FireStationDTO;
 import com.safetynetapi.model.FireStation;
 
 import java.util.List;

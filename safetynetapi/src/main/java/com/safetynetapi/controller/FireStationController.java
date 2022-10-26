@@ -1,6 +1,6 @@
 package com.safetynetapi.controller;
 
-import com.safetynetapi.dto.FireStationDTO;
+import com.safetynetapi.model.dto.FireStationDTO;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.service.IFireStationService;
 import lombok.extern.log4j.Log4j2;
@@ -74,7 +74,6 @@ public class FireStationController {
 
     @DeleteMapping("/firestation")
     public Map<String,Boolean> deleteFireStation(@RequestParam("address") String address, @RequestParam("station") String station){
-        FireStation fireStationDelete = fireStationService.delete(address,station);
         log.info("Request:DELETE /firestation?address="+address+"&station="+station);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

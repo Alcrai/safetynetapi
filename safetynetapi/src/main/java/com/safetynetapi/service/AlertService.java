@@ -1,9 +1,9 @@
 package com.safetynetapi.service;
 
-import com.safetynetapi.dto.*;
 import com.safetynetapi.model.FireStation;
 import com.safetynetapi.model.MedicalRecord;
 import com.safetynetapi.model.Person;
+import com.safetynetapi.model.dto.*;
 import com.safetynetapi.repository.ILoadDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
